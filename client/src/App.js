@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
+import {
+  ApolloClient,
+  gql,
+  graphql,
+  ApolloProvider,
+} from 'react-apollo';
 import logo from './logo.svg';
 import './App.css';
+
+const client = new ApolloClient();
 
 const ChannelsList = () =>
   (<ul>
@@ -8,6 +16,21 @@ const ChannelsList = () =>
     <li>Channel 2</li>
   </ul>);
 
+const channelsListQuery = gql`
+  query ChannelsListQuery {
+    channels {
+      id
+      name
+    }
+  }
+`;
+
+// Wrap our ChannelsList component with a graphql HOC
+// ChannelsList component will receive a prop called data, which will
+// contain channels when it is available or error when there is an error.
+// data also contains a loading property which is try when Apollo client
+// waiting for data to be fetched.
+const ChannelsListWithData = graphql(channelsListQuery)(ChannelsList);
 
 class App extends Component {
   render() {
