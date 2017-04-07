@@ -1,4 +1,5 @@
 import React from 'react';
+import AddChannel from './AddChannel';
 
 const ChannelsList = ({ data: { loading, error, allChannels }}) => {
   if (loading) {
@@ -8,9 +9,10 @@ const ChannelsList = ({ data: { loading, error, allChannels }}) => {
     return <p>{error.message}</p>;
   }
 
-  return <ul>
-    { allChannels.map( ch => <li key={ch.id}>{ch.name}</li>)}
-  </ul>
+  return <div className="channelsList">
+    <AddChannel />
+    { allChannels.map( ch => <div key={ch.id}>{ch.name}</div>)}
+  </div>
 }
 
 export default ChannelsList;
