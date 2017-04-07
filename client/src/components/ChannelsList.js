@@ -37,6 +37,12 @@ export const channelsListQuery = gql`
 // contain channels when it is available or error when there is an error.
 // data also contains a loading property which is try when Apollo client
 // waiting for data to be fetched.
-const ChannelsListWithData = graphql(channelsListQuery)(ChannelsList);
+const ChannelsListWithData = graphql(channelsListQuery
+  // Uncomment to poll, updating the ChannelsList on the client
+  // whenever the store is updated.
+  // , {
+  //   options: { pollInterval: 5000 },
+  // }
+)(ChannelsList);
 
 export default ChannelsListWithData;
