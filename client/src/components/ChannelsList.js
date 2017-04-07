@@ -22,7 +22,14 @@ const ChannelsList = ({ data: { loading, error, allChannels }}) => {
 }
 
 // NOTE: after creating network interface to graphcool, we had to rename
-// channels to allChannels - why?
+// channels to allChannels. That's because a query to graphcool for Channels
+// would return a single Channel.
+// Also worth noting: if you search for a Channel, yuo'll need to pass an ID.
+// Also, the schema defined should be singular. Defining a Messages type, and
+// searching for allMessages doesn't work; graphcool expects allMessageses,
+// which is just awkward.
+//
+// I had to change my type name to Message before I could run a query for allMessages.
 export const channelsListQuery = gql`
   query ChannelsListQuery {
     allChannels {
