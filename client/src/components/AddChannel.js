@@ -4,6 +4,10 @@ import {
   graphql,
 } from 'react-apollo';
 
+// import the previously written query rather than re-writing it for refetch
+import { channelsListQuery } from './ChannelsList';
+
+
 // Update AddChannel to accept a `mutate` prop
 const AddChannel = ({ mutate }) => {
   const handleKeyUp = (evt) => {
@@ -14,6 +18,9 @@ const AddChannel = ({ mutate }) => {
 
       mutate({
         variables: { name: evt.target.value },
+        // add refetchQueries to indicate the query to refetch
+        // after performing mutations
+        refetchQueries: [{ query: channelsListQuery }]
       })
       .then( res => {
         evt.target.value = '';
