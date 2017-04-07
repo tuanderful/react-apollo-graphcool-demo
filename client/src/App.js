@@ -8,26 +8,15 @@ import {
   // creates interface (in our case, to graphcool)
   createNetworkInterface,
 } from 'react-apollo';
+
+import ChannelsList from './components/ChannelsList.js';
+
 import logo from './logo.svg';
 import './App.css';
 
 const client = new ApolloClient({
-  networkInterface: createNetworkInterface('https://api.graph.cool/simple/v1/')
+  networkInterface: createNetworkInterface('https://api.graph.cool/simple/v1/cj171nfzorwla0118r5mwj5ng')
 });
-
-const ChannelsList = ({ data: { loading, error, allChannels }}) => {
-  if (loading) {
-    return <p>Loading ...</p>
-  }
-  if (error) {
-    return <p>{error.message}</p>;
-  }
-
-  return <ul>
-    { allChannels.map( ch => <li key={ch.id}>{ch.name}</li>)}
-  </ul>
-
-}
 
 // NOTE: after creating network interface to graphcool, we had to rename
 // channels to allChannels - why?
