@@ -1,4 +1,8 @@
 import React from 'react';
+import {
+  gql,
+  graphql,
+} from 'react-apollo';
 
 // Update AddChannel to accept a `mutate` prop
 const AddChannel = ({ mutate }) => {
@@ -26,9 +30,10 @@ const AddChannel = ({ mutate }) => {
   );
 };
 
+// Tutorial uses `addChannel`, we use `createChannel` instead
 const addChannelMutation = gql`
   mutation addChannel($name: String!) {
-    addChannel(name: $name) {
+    createChannel(name: $name) {
       id
       name
     }
